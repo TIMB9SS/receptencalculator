@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f3e32"><title>BOLLE LAB · Receptencalculator 6BCW</title>
+<meta name="description" content="Receptencalculator op basis van de ingrediëntentabel van de ijsles: suiker, vet, VVMB, overige droge stof, PAC en POD.">
+<style>
+:root{--ink:#12392e;--pine:#103d32;--mint:#e7f4e9;--lime:#d8f26d;--cream:#f8f6ef;--paper:#fffdfa;--muted:#6d817a;--line:#d9e1dc;--danger:#a62a2a;--shadow:0 8px 28px rgba(21,51,40,.045)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,'Segoe UI',sans-serif;line-height:1.5}button,input{font:inherit}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}.skip{position:absolute;left:-999px;top:5px;background:white;padding:12px;z-index:5}.skip:focus{left:5px}.topbar{border-bottom:1px solid var(--line);background:#fffefa}.topinner{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:25px;font-weight:900;letter-spacing:-1.5px}.logo>span{color:#87a82a}.sup{font-size:10px!important;letter-spacing:2px!important;font-weight:700;vertical-align:middle;margin-left:7px;color:var(--muted)!important}.topmeta,.eyebrow{font-size:11px;letter-spacing:2.3px;font-weight:800;color:#608078}.intro{display:flex;align-items:end;justify-content:space-between;padding:64px 0 48px;gap:20px}.intro h1{font-size:clamp(43px,6vw,75px);line-height:1.07;letter-spacing:-3.2px;margin:17px 0}.intro em{font-family:Georgia,serif;font-weight:normal;letter-spacing:-2px}.intro p{max-width:590px;font-size:16px;color:#5b7066}.intro-side{background:var(--lime);border-radius:999px;width:175px;height:175px;flex-shrink:0;display:flex;justify-content:center;align-items:center;flex-direction:column;transform:rotate(8deg)}.intro-side .mark{font-size:54px;font-weight:900;line-height:1}.intro-side p{font-size:11px;text-align:center;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:var(--ink);margin:7px 0}.layout{display:grid;grid-template-columns:.92fr 1.08fr;gap:22px;align-items:start}.panel{background:var(--paper);padding:29px;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.panel-head{display:flex;align-items:start;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:21px;margin-bottom:22px}h2{margin:5px 0 0;font-size:25px;letter-spacing:-.8px}.tiny-pill,.status{font-size:12px;background:#edf4ef;padding:6px 12px;border-radius:50px;font-weight:750;color:var(--pine);white-space:nowrap}.status.good{background:#e2f3d4}.status.warn{background:#fff1cf;color:#86500c}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:17px}.field span{font-size:13px;font-weight:750;display:flex;align-items:center;justify-content:space-between;gap:6px}.field span small{color:var(--muted);font-size:12px;font-weight:normal}.field>small{color:var(--muted);font-size:11px}.field input{width:100%;border:1px solid #cad8cf;border-radius:10px;padding:12px 13px;background:white;font-weight:700;font-size:18px;color:var(--ink)}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #a2cc40;outline-offset:3px}.inline-note{background:#f0f6ef;border-radius:11px;padding:13px 15px;font-size:12px;color:#416357;margin:4px 0 22px}.actions,.result-actions{display:flex;gap:10px;flex-wrap:wrap}.primary,.secondary{border:0;border-radius:9px;padding:13px 18px;font-size:13px;font-weight:800;cursor:pointer}.primary{background:var(--pine);color:white;display:flex;justify-content:space-between;align-items:center;gap:20px;flex:1}.primary:hover{background:#20664f}.secondary{background:#edf1ea;color:var(--ink)}.secondary:hover{background:#e0eadc}.secondary:disabled{opacity:.4;cursor:not-allowed}.error{background:#fff0ee;color:var(--danger);padding:10px 13px;border-radius:10px;font-size:13px}.output-lead{color:var(--muted);font-size:13px;margin:-4px 0 22px}.totals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:23px}.totals>div{background:#f0f4f0;padding:14px 12px;border-radius:10px;display:flex;flex-direction:column;gap:6px}.totals span{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}.totals strong{font-size:20px;letter-spacing:-.5px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}th{color:#58746a;text-transform:uppercase;font-size:10px;letter-spacing:1px;font-weight:800;padding:13px 7px;border-bottom:1px solid var(--line)}td{padding:10px 7px;border-bottom:1px solid #edf0ec}th:not(:first-child),td:not(:first-child){text-align:right}tbody tr:last-child td{border-bottom:0}td strong{font-weight:800}.subhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:27px 0 0}.subhead h3{font-size:16px}.subhead span{font-size:11px;color:var(--muted)}.compare td{white-space:nowrap}.difference-good{color:#397044}.difference-warn{color:#b06424}.result-actions{margin-top:23px}.notes{padding:60px 0 70px;display:grid;grid-template-columns:.7fr 1.3fr;gap:55px}.notes h2{font-size:32px}.notes-copy p{color:#5d7568;font-size:14px;margin:0 0 15px}.notes-copy .important{border-left:3px solid #b9c767;background:#f0f3e8;padding:13px 16px;color:#425b47;border-radius:0 10px 10px 0}footer{background:#103d32;color:#f3faf3;font-size:10px;letter-spacing:1.3px}.footer-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}@media(max-width:850px){.layout{grid-template-columns:1fr}.intro-side{width:120px;height:120px}.intro-side .mark{font-size:40px}.intro-side p{font-size:9px}}@media(max-width:560px){.wrap{width:calc(100% - 28px)}.intro{padding:44px 0 25px}.intro h1{font-size:43px;letter-spacing:-1.9px}.intro-side,.topmeta{display:none}.panel{padding:20px 17px}.totals strong{font-size:17px}.totals span{font-size:9px}.notes{grid-template-columns:1fr;gap:14px}.footer-inner{flex-direction:column;justify-content:center;text-align:center;gap:7px;padding:18px 0}.form-grid{gap:9px}}
+@media print{body{background:white}.topbar,.intro-side,.controls,.result-actions,.notes,.skip{display:none!important}.layout{display:block}.panel{box-shadow:none;border:0}.wrap{width:100%}.intro{padding:0}.intro h1{font-size:24px}footer{display:none}}
+/* Laat brede tabellen binnen hun eigen scrollvlak in plaats van het scherm te vergroten. */
+.layout,.panel,.table-wrap,.controls form{min-width:0;max-width:100%}
+@media(max-width:560px){.actions{flex-direction:column}.actions .primary,.actions .secondary{width:100%;flex:none}.subhead{flex-wrap:wrap}.table-wrap{overflow-x:auto}}
+
+
+/* Herwerking op basis van de eigen Excel-ingrediëntentabel */
+.source-banner{background:#f2f7d7;border:1px solid #dce99d;color:#405637;padding:15px 20px;border-radius:13px;margin:-15px 0 24px;line-height:1.55;font-size:13px}
+.field select{width:100%;border:1px solid #cad8cf;border-radius:10px;padding:12px 13px;font-size:15px;font-weight:650;color:var(--ink);background:#fff}
+.intro-side{background:#d8f26d}.ingredient-picker{border:1px solid #d5e3d4;border-radius:12px;margin:0 0 20px;background:#fcfefa}
+.ingredient-picker>summary{list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:pointer;padding:14px 16px;font-size:13px;font-weight:800}
+.ingredient-picker>summary::-webkit-details-marker{display:none}.ingredient-picker>summary:before{content:'▸';margin-right:4px;color:#86a82a}.ingredient-picker[open]>summary:before{content:'▾'}
+.ingredient-picker summary small{font-size:11px;color:#607a69;font-weight:600;white-space:nowrap}.picker-help{font-size:12px;color:#5e786c;margin:0;padding:0 15px 12px}
+.ingredient-options{max-height:380px;overflow-y:auto;padding:0 12px 14px}.option-group{border-top:1px solid #e6ede4;padding:8px 0}.option-group h4{font-size:12px;text-transform:uppercase;color:#59776b;margin:7px 0 9px}
+.ingredient-option{display:grid;grid-template-columns:18px 1fr auto;gap:7px;align-items:center;font-size:12px;padding:6px;cursor:pointer}.ingredient-option input{accent-color:#1b624e}.ingredient-option small{color:#738d7b;font-size:10px}
+.data-section{padding:45px 0 4px}.section-heading h2{font-size:31px;margin:8px 0}.section-heading p{max-width:800px;font-size:13px;color:#5d7568}.table-details{border:1px solid var(--line);background:#fffdfa;border-radius:15px;margin-top:18px;overflow:hidden}.table-details>summary{cursor:pointer;font-weight:800;padding:18px 20px}.table-details>.table-wrap{padding:0 16px}.data-table{font-size:11px;white-space:nowrap}.data-table th{font-size:9px}.data-table td{padding:7px 7px}.data-table td:nth-child(2){text-align:left}.table-details .picker-help{padding:16px;line-height:1.5}
+.result-notice{font-size:12px;color:#5a7064;background:#f2f6f0;padding:12px 14px;border-radius:10px}
+.notes{padding-top:46px}
+@media(max-width:570px){.ingredient-option{grid-template-columns:17px 1fr;}.ingredient-option small{grid-column:2}.source-banner{margin:0 0 18px}}
+@media print{.data-section,.source-banner,.ingredient-picker{display:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#calculator">Naar receptencalculator</a>
+<header class="topbar"><div class="wrap topinner"><span class="logo">BOLLE<span>.</span><span class="sup">LAB / 6BCW</span></span><span class="topmeta">49 ingrediënten · lineair programmeren · offline</span></div></header>
+<main class="wrap" id="calculator">
+<section class="intro" aria-labelledby="heading"><div><span class="eyebrow">HERWERKT MET JULLIE EXCELTABEL</span><h1 id="heading">Jouw ijsrecept.<br><em>Automatisch berekend.</em></h1><p>Geef de gewenste percentages en PAC/POD in. De calculator zoekt met lineair programmeren naar een passend recept, met een exacte controle van de berekende waarden.</p></div><div class="intro-side"><span class="mark">49</span><p>ingrediënten uit<br>de lestabel</p></div></section>
+<div class="source-banner"><strong>Gebaseerd op je afbeelding van de Excel-tabel.</strong> Kolommen: suiker %, vet %, VVMB %, overige droge stof %, PAC en POD. De originele waarden zijn hieronder controleerbaar. <strong>Let op:</strong> bij zuivel is voorlopig een schaalcorrectie toegepast (PAC en POD ÷ 100); laat deze interpretatie door je leerkracht bevestigen.</div>
+<div class="layout">
+<section class="panel controls" aria-labelledby="input-heading">
+<div class="panel-head"><div><span class="eyebrow">STAP 1</span><h2 id="input-heading">Gewenste samenstelling</h2></div><span class="tiny-pill">Aanpasbaar</span></div>
+<form id="recipe-form" novalidate>
+<label class="field wide"><span>Hoeveel ijsmix <small>gram</small></span><input id="batch" name="batch" type="number" min="100" max="20000" step="50" required value="1000"><small>100 tot 20.000 gram.</small></label>
+<div class="form-grid">
+<label class="field"><span>Suiker <small>%</small></span><input name="sugar" type="number" min="0" max="100" step="0.1" value="17.6" required></label>
+<label class="field"><span>Vet <small>%</small></span><input name="fat" type="number" min="0" max="100" step="0.1" value="4.6" required></label>
+<label class="field"><span>VVMB <small>%</small></span><input name="msnf" type="number" min="0" max="100" step="0.1" value="10.1" required></label>
+<label class="field"><span>Overige droge stof <small>%</small></span><input name="other" type="number" min="0" max="100" step="0.1" value="0.4" required></label>
+<label class="field"><span>Gewenste PAC <small>g/kg</small></span><input name="pac" type="number" min="0" max="1000" step="0.1" value="291" required></label>
+<label class="field"><span>Gewenste POD <small>g/kg</small></span><input name="pod" type="number" min="0" max="1000" step="0.1" value="171.5" required></label>
+</div>
+<label class="field"><span>Receptsoort / beschikbare ingrediënten</span><select name="preset" id="preset"><option value="melkijs">Melkijs — 8 basisgrondstoffen</option><option value="sorbet">Sorbet — min. 20% fruit (voorbeeldregel)</option><option value="alles">Alle 49 ingrediënten</option></select></label>
+<div class="inline-note">De eerste waarden zijn een <strong>rekenvoorbeeld</strong>, niet de verplichte samenstelling. <strong>Suiker %</strong> volgt de suiker-kolom van je tabel (dus geen andere definitie van toegevoegde suikers). Voor PAC/POD gebruiken we gram sacharose-equivalent per kilogram.</div>
+<details class="ingredient-picker"><summary><span>Ingrediënten aan- of uitzetten</span><small id="count-active">8 geselecteerd</small></summary><p class="picker-help">Bepaal welke grondstoffen in de oplossing mogen voorkomen. De maxima (g per kg) en de sorbetregel van minimaal 20% fruit zijn <strong>didactische aannames</strong>, geen waarden uit de screenshot.</p><div id="ingredient-options" class="ingredient-options"></div></details>
+<div class="actions"><button type="submit" class="primary">Bereken recept <span aria-hidden="true">↗</span></button><button type="button" id="reset" class="secondary">Opnieuw beginnen</button></div><p id="error" class="error" role="alert" hidden></p>
+</form></section>
+<section class="panel output" aria-labelledby="output-heading">
+<div class="panel-head"><div><span class="eyebrow">STAP 2</span><h2 id="output-heading">Berekend recept</h2></div><span id="status" class="status">Gereed</span></div>
+<p class="output-lead">Lineaire optimalisatie op basis van de geselecteerde ingrediënten. Afronding kan een paar honderdsten verschil geven.</p>
+<div class="totals"><div><span>Totale batch</span><strong id="sum-mass">—</strong></div><div><span>Droge stof</span><strong id="sum-solids">—</strong></div><div><span>Water in mix</span><strong id="sum-water">—</strong></div></div>
+<div class="table-wrap"><table><thead><tr><th>Ingrediënt</th><th>Gram</th><th>% van mix</th></tr></thead><tbody id="ingredient-rows"><tr><td colspan="3">Bereken eerst een recept.</td></tr></tbody></table></div>
+<div class="subhead"><h3>Controle van je doelen</h3><span>Doel ↔ resultaat</span></div>
+<div class="table-wrap"><table class="compare"><thead><tr><th>Kenmerk</th><th>Doel</th><th>Uitkomst</th><th>Afwijking</th></tr></thead><tbody id="metric-rows"></tbody></table></div>
+<p id="result-notice" class="result-notice" aria-live="polite"></p>
+<div class="result-actions"><button id="csv" type="button" class="secondary" disabled>CSV-recept downloaden ↓</button><button id="print" type="button" class="secondary">Recept afdrukken</button></div>
+</section>
+</div>
+<section class="data-section"><div class="section-heading"><span class="eyebrow">BRONDATA / 49 RIJEN</span><h2>De ingrediëntentabel uit jullie les</h2><p>Deze tabel is overgenomen uit je screenshot (Excel-rijen 2 t/m 50). De rekenkolommen <em>totaal droge stof</em> en <em>water</em> worden uit de vier percentages afgeleid. Bij PAC/POD wordt de originele bronwaarde getoond.</p></div>
+<details class="table-details"><summary>Bekijk alle 49 ingrediënten en bronwaarden</summary><div class="table-wrap"><table class="data-table"><thead><tr><th>Rij</th><th>Ingrediënt</th><th>Suiker %</th><th>Vet %</th><th>VVMB %</th><th>Overige %</th><th>Droog %</th><th>Water %</th><th>PAC ruw</th><th>POD ruw</th><th>÷ schaal</th></tr></thead><tbody id="source-rows"></tbody></table></div><p class="picker-help">÷ schaal = 100 bij zuivelwaarden die in de afbeelding 4,905 / 0,7848 enz. bedragen; anders 1. De originele celwaarden zijn niet overschreven. Ook hazelnootpasta heeft in de screenshot 35% VVMB: dit is letterlijk overgenomen en verdient controle.</p></details></section>
+<section class="notes" aria-labelledby="notes-heading"><div><span class="eyebrow">REKENMETHODE</span><h2 id="notes-heading">Zo werkt linear programming</h2></div><div class="notes-copy"><p>Voor iedere grondstof bepaalt het programma een massa <strong>xᵢ</strong> in gram. De som van de massa's is gelijk aan de opgegeven batch. Voor suiker, vet, VVMB en overige droge stof geldt <strong>Σ(xᵢ × percentageᵢ / 100)</strong>. Voor PAC/POD geldt <strong>Σ(xᵢ × factorᵢ)</strong>, omgerekend naar de opgegeven batch.</p><p>Een tweefasen-simplex-algoritme zoekt een oplossing binnen de toegelaten ingrediënten, maximale doseringen en een voorbeeldminimum van 20% fruit voor sorbet. Zijn alle doelen tegelijk haalbaar, dan staan doel en uitkomst gelijk. Anders minimaliseert de calculator de afwijkingen en toont hij die duidelijk in plaats van valselijk een perfect recept te beloven.</p><p class="important"><strong>Te controleren voor de beoordeling:</strong> de originele tabel toont bij zuivel sterk afwijkende PAC/POD-schalen. Hiervoor gebruik ik een <em>veronderstelde</em> deling door 100. De les kan een andere berekening voorschrijven, met name voor gecondenseerde melk en hazelnootpasta. Ook komen de maximaal toegelaten doseringen niet uit jullie lesafbeelding.</p></div></section>
+</main><footer><div class="wrap footer-inner"><span>BOLLE. · SCHOOLPROJECT 6BCW</span><span>Alle berekeningen lokaal in je browser · geen server nodig</span></div></footer>
+<script>
+/* BOLLE. RECEPTENCALCULATOR / dataset overgenomen uit de aangeleverde tabel (rij 2–50).
+   Factorinterpretatie voor zuivel: PAC/POD-cijfers worden gedeeld door 100; dit moet nog
+   bevestigd worden door de leerkracht. Originele waarden blijven in pacRaw/podRaw.
+   Geen externe bibliotheken of netwerk nodig. */
+(function(root,factory){const api=factory(); if(typeof module!=="undefined"&&module.exports)module.exports=api; root.IceModel=api;})(typeof window==="undefined"?globalThis:window,function(){
+  'use strict';
+  const EPS=1e-8, BASE=1000;
+  const INGREDIENTS=[{"id":"item2","row":2,"name":"Water","sugar":0,"fat":0,"msnf":0,"other":0,"solids":0,"water":100,"pacRaw":0,"podRaw":0,"scale":1,"group":"basis","max":1000},{"id":"item3","row":3,"name":"Volle melk (3,5%)","sugar":0,"fat":3.5,"msnf":9,"other":0,"solids":12.5,"water":87.5,"pacRaw":4.905,"podRaw":0.7848,"scale":100,"group":"zuivel","max":950},{"id":"item4","row":4,"name":"Halfvolle melk","sugar":0,"fat":1.8,"msnf":9,"other":0,"solids":10.8,"water":89.2,"pacRaw":4.905,"podRaw":0.7848,"scale":100,"group":"zuivel","max":950},{"id":"item5","row":5,"name":"Magere melk","sugar":0,"fat":0.2,"msnf":9,"other":0,"solids":9.2,"water":90.8,"pacRaw":4.905,"podRaw":0.7848,"scale":100,"group":"zuivel","max":950},{"id":"item6","row":6,"name":"Melkpoeder","sugar":0,"fat":26,"msnf":70,"other":0,"solids":96,"water":4,"pacRaw":38.16,"podRaw":6.104,"scale":100,"group":"zuivel","max":200},{"id":"item7","row":7,"name":"Magere melkpoeder","sugar":0,"fat":1,"msnf":95,"other":0,"solids":96,"water":4,"pacRaw":51.775,"podRaw":8.284,"scale":100,"group":"zuivel","max":200},{"id":"item8","row":8,"name":"Room (35% vet)","sugar":0,"fat":35,"msnf":5.8,"other":0,"solids":40.8,"water":59.2,"pacRaw":3.101,"podRaw":0.50576,"scale":100,"group":"zuivel","max":360},{"id":"item9","row":9,"name":"Room (38% vet)","sugar":0,"fat":38,"msnf":5.6,"other":0,"solids":43.6,"water":56.4,"pacRaw":3.052,"podRaw":0.48832,"scale":100,"group":"zuivel","max":350},{"id":"item10","row":10,"name":"Boter","sugar":0,"fat":84,"msnf":0,"other":0,"solids":84,"water":16,"pacRaw":0,"podRaw":0,"scale":1,"group":"zuivel","max":120},{"id":"item11","row":11,"name":"Gecondenseerde melk (gezoet)","sugar":43,"fat":9,"msnf":24,"other":0,"solids":76,"water":24,"pacRaw":13.08,"podRaw":2.0928,"scale":100,"group":"zuivel","max":250},{"id":"item12","row":12,"name":"Verdampte melk","sugar":0,"fat":8.5,"msnf":21,"other":0,"solids":29.5,"water":70.5,"pacRaw":11.445,"podRaw":1.8312,"scale":100,"group":"zuivel","max":350},{"id":"item13","row":13,"name":"Volle yoghurt","sugar":0,"fat":4,"msnf":9.5,"other":0,"solids":13.5,"water":86.5,"pacRaw":5.1775,"podRaw":0.8284,"scale":100,"group":"zuivel","max":900},{"id":"item14","row":14,"name":"Suiker","sugar":100,"fat":0,"msnf":0,"other":0,"solids":100,"water":0,"pacRaw":1,"podRaw":1,"scale":1,"group":"zoetstof","max":300},{"id":"item15","row":15,"name":"Dextrose","sugar":92,"fat":0,"msnf":0,"other":0,"solids":92,"water":8,"pacRaw":1.9,"podRaw":0.7,"scale":1,"group":"zoetstof","max":250},{"id":"item16","row":16,"name":"Glucose pasta","sugar":81,"fat":0,"msnf":0,"other":0,"solids":81,"water":19,"pacRaw":0.08,"podRaw":0.3,"scale":1,"group":"zoetstof","max":270},{"id":"item17","row":17,"name":"Invertsuiker","sugar":75,"fat":0,"msnf":0,"other":0,"solids":75,"water":25,"pacRaw":1.9,"podRaw":1.3,"scale":1,"group":"zoetstof","max":200},{"id":"item18","row":18,"name":"Honing","sugar":80,"fat":0,"msnf":0,"other":0,"solids":80,"water":20,"pacRaw":1,"podRaw":0.7,"scale":1,"group":"zoetstof","max":200},{"id":"item19","row":19,"name":"Ei","sugar":0,"fat":0,"msnf":0,"other":23,"solids":23,"water":77,"pacRaw":0,"podRaw":0,"scale":1,"group":"overig","max":250},{"id":"item20","row":20,"name":"Eigeel","sugar":0,"fat":30,"msnf":0,"other":18,"solids":48,"water":52,"pacRaw":0,"podRaw":0,"scale":1,"group":"overig","max":170},{"id":"item21","row":21,"name":"Cacao 22-24%","sugar":0,"fat":23,"msnf":0,"other":72,"solids":95,"water":5,"pacRaw":0,"podRaw":0,"scale":1,"group":"overig","max":200},{"id":"item22","row":22,"name":"Chocolade (70%)","sugar":30,"fat":40,"msnf":0,"other":30,"solids":100,"water":0,"pacRaw":0,"podRaw":0,"scale":1,"group":"overig","max":270},{"id":"item23","row":23,"name":"Munt pasta","sugar":78,"fat":0,"msnf":0,"other":2,"solids":80,"water":20,"pacRaw":0,"podRaw":0,"scale":1,"group":"overig","max":120},{"id":"item24","row":24,"name":"Hazelnoot pasta","sugar":0,"fat":65,"msnf":35,"other":0,"solids":100,"water":0,"pacRaw":19.075,"podRaw":3.052,"scale":100,"group":"overig","max":250},{"id":"item25","row":25,"name":"Stabilisator","sugar":0,"fat":0,"msnf":0,"other":100,"solids":100,"water":0,"pacRaw":0,"podRaw":0,"scale":1,"group":"structuur","max":10},{"id":"item26","row":26,"name":"Watermeloen","sugar":6,"fat":0,"msnf":0,"other":5,"solids":11,"water":89,"pacRaw":0.06,"podRaw":0.06,"scale":1,"group":"fruit","max":850},{"id":"item27","row":27,"name":"Abrikoos","sugar":9,"fat":0,"msnf":0,"other":9,"solids":18,"water":82,"pacRaw":0.09,"podRaw":0.09,"scale":1,"group":"fruit","max":850},{"id":"item28","row":28,"name":"Ananas","sugar":12,"fat":0,"msnf":0,"other":9,"solids":21,"water":79,"pacRaw":0.12,"podRaw":0.12,"scale":1,"group":"fruit","max":850},{"id":"item29","row":29,"name":"Appelsien","sugar":8,"fat":0,"msnf":0,"other":8,"solids":16,"water":84,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item30","row":30,"name":"Banaan","sugar":14,"fat":0,"msnf":0,"other":9,"solids":23,"water":77,"pacRaw":0.14,"podRaw":0.14,"scale":1,"group":"fruit","max":850},{"id":"item31","row":31,"name":"Kers","sugar":10,"fat":0,"msnf":0,"other":6,"solids":16,"water":84,"pacRaw":0.1,"podRaw":0.1,"scale":1,"group":"fruit","max":850},{"id":"item32","row":32,"name":"Vijg","sugar":12,"fat":0,"msnf":0,"other":8,"solids":20,"water":80,"pacRaw":0.12,"podRaw":0.12,"scale":1,"group":"fruit","max":850},{"id":"item33","row":33,"name":"Aardbei","sugar":8,"fat":0,"msnf":0,"other":7,"solids":15,"water":85,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item34","row":34,"name":"Kiwi","sugar":7,"fat":0,"msnf":0,"other":3,"solids":10,"water":90,"pacRaw":0.07,"podRaw":0.07,"scale":1,"group":"fruit","max":850},{"id":"item35","row":35,"name":"Framboos","sugar":7,"fat":0,"msnf":0,"other":7,"solids":14,"water":86,"pacRaw":0.07,"podRaw":0.07,"scale":1,"group":"fruit","max":850},{"id":"item36","row":36,"name":"Citroen","sugar":5,"fat":0,"msnf":0,"other":8,"solids":13,"water":87,"pacRaw":0.05,"podRaw":0.05,"scale":1,"group":"fruit","max":850},{"id":"item37","row":37,"name":"Mandarijn","sugar":8,"fat":0,"msnf":0,"other":8,"solids":16,"water":84,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item38","row":38,"name":"Appel","sugar":8,"fat":0,"msnf":0,"other":6,"solids":14,"water":86,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item39","row":39,"name":"Mango","sugar":13,"fat":0,"msnf":0,"other":8,"solids":21,"water":79,"pacRaw":0.13,"podRaw":0.13,"scale":1,"group":"fruit","max":850},{"id":"item40","row":40,"name":"Meloen","sugar":8,"fat":0,"msnf":0,"other":5,"solids":13,"water":87,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item41","row":41,"name":"Passievrucht","sugar":7,"fat":0,"msnf":0,"other":4,"solids":11,"water":89,"pacRaw":0.07,"podRaw":0.07,"scale":1,"group":"fruit","max":850},{"id":"item42","row":42,"name":"Papaya","sugar":8,"fat":0,"msnf":0,"other":7,"solids":15,"water":85,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item43","row":43,"name":"Peer","sugar":9,"fat":0,"msnf":0,"other":6,"solids":15,"water":85,"pacRaw":0.09,"podRaw":0.09,"scale":1,"group":"fruit","max":850},{"id":"item44","row":44,"name":"Pompelmoes","sugar":8,"fat":0,"msnf":0,"other":6,"solids":14,"water":86,"pacRaw":0.08,"podRaw":0.08,"scale":1,"group":"fruit","max":850},{"id":"item45","row":45,"name":"Tomaat","sugar":4,"fat":0,"msnf":0,"other":4,"solids":8,"water":92,"pacRaw":0.04,"podRaw":0.04,"scale":1,"group":"fruit","max":850},{"id":"item46","row":46,"name":"Perzik","sugar":9,"fat":0,"msnf":0,"other":9,"solids":18,"water":82,"pacRaw":0.09,"podRaw":0.09,"scale":1,"group":"fruit","max":850},{"id":"item47","row":47,"name":"Braambes","sugar":6,"fat":0,"msnf":0,"other":9,"solids":15,"water":85,"pacRaw":0.06,"podRaw":0.06,"scale":1,"group":"fruit","max":850},{"id":"item48","row":48,"name":"Druif","sugar":20,"fat":0,"msnf":0,"other":3,"solids":23,"water":77,"pacRaw":0.2,"podRaw":0.2,"scale":1,"group":"fruit","max":850},{"id":"item49","row":49,"name":"Maltodextrine","sugar":96,"fat":0,"msnf":0,"other":0,"solids":96,"water":4,"pacRaw":0.1,"podRaw":0.11,"scale":1,"group":"structuur","max":220},{"id":"item50","row":50,"name":"Inuline","sugar":7,"fat":0,"msnf":0,"other":90,"solids":97,"water":3,"pacRaw":0,"podRaw":0.45,"scale":1,"group":"structuur","max":110}];
+  const METRICS=['sugar','fat','msnf','other','pod','pac'];
+  const DEFAULTS={batch:1000,sugar:17.6,fat:4.6,msnf:10.1,other:0.4,pod:171.5,pac:291,preset:'melkijs'};
+  const PRESETS={
+    melkijs:new Set(['Water','Volle melk (3,5%)','Magere melkpoeder','Room (35% vet)','Suiker','Dextrose','Stabilisator','Inuline']),
+    sorbet:new Set(['Water','Suiker','Dextrose','Glucose pasta','Invertsuiker','Honing','Maltodextrine','Inuline','Stabilisator',...INGREDIENTS.filter(i=>i.group==='fruit').map(i=>i.name)]),
+    alles:new Set(INGREDIENTS.map(i=>i.name))
+  };
+  function coefficient(ing,metric){
+    if(metric==='pac') return ing.pacRaw/ing.scale;
+    if(metric==='pod') return ing.podRaw/ing.scale;
+    return ing[metric]/100;
+  }
+  function selectedForPreset(preset){return INGREDIENTS.filter(i=>PRESETS[preset]?.has(i.name)).map(i=>i.id)}
+  function metricTarget(input,metric){return ['pac','pod'].includes(metric)?Number(input[metric])*Number(input.batch)/BASE:Number(input[metric])*Number(input.batch)/100;}
+  function metricsFor(quantities,batch){
+    const sums={}; for(const k of METRICS) sums[k]=INGREDIENTS.reduce((a,i,j)=>a+coefficient(i,k)*quantities[j],0);
+    const o={}; for(const k of METRICS) o[k]=['pac','pod'].includes(k)?sums[k]*BASE/batch:sums[k]*100/batch;
+    o.totalSolids=o.sugar+o.fat+o.msnf+o.other;o.water=100-o.totalSolids;
+    return o;
+  }
+  class Simplex {
+    constructor(A,b,c) {
+      this.m=b.length; this.n=c.length;
+      this.N=Array.from({length:this.n+1},(_,i)=>i);
+      this.B=Array.from({length:this.m},(_,i)=>this.n+i);
+      this.D=Array.from({length:this.m+2},()=>Array(this.n+2).fill(0));
+      for (let i=0;i<this.m;i++) {
+        for (let j=0;j<this.n;j++) this.D[i][j]=A[i][j];
+        this.D[i][this.n]=-1;
+        this.D[i][this.n+1]=b[i];
+      }
+      for (let j=0;j<this.n;j++) this.D[this.m][j]=-c[j];
+      this.N[this.n]=-1;
+      this.D[this.m+1][this.n]=1;
+    }
+    pivot(r,s) {
+      const {m,n,D}=this;
+      const inv=1/D[r][s];
+      for (let i=0;i<m+2;i++) if(i!==r)
+        for(let j=0;j<n+2;j++) if(j!==s) D[i][j]-=D[r][j]*D[i][s]*inv;
+      for(let j=0;j<n+2;j++) if(j!==s) D[r][j]*=inv;
+      for(let i=0;i<m+2;i++) if(i!==r) D[i][s]*=-inv;
+      D[r][s]=inv;
+      const swap=this.B[r]; this.B[r]=this.N[s]; this.N[s]=swap;
+    }
+    phase(phase) {
+      const {m,n,D,N,B}=this;
+      let iters=0;
+      while (++iters<30000) {
+        const x=phase===1?m+1:m;
+        let s=-1;
+        for(let j=0;j<=n;j++) {
+          if (phase===2 && N[j]===-1) continue;
+          if (s===-1 || D[x][j]<D[x][s]-EPS ||
+             (Math.abs(D[x][j]-D[x][s])<=EPS && N[j]<N[s])) s=j;
+        }
+        if (s===-1 || D[x][s]>=-EPS) return true;
+        let r=-1;
+        for(let i=0;i<m;i++) {
+          if (D[i][s]<=EPS) continue;
+          if (r===-1 || D[i][n+1]/D[i][s]<D[r][n+1]/D[r][s]-EPS ||
+             (Math.abs(D[i][n+1]/D[i][s]-D[r][n+1]/D[r][s])<=EPS && B[i]<B[r])) r=i;
+        }
+        if(r===-1) return false;
+        this.pivot(r,s);
+      }
+      throw new Error('Optimalisatie stopte door een iteratielimiet.');
+    }
+    solve() {
+      const {m,n,D,B,N}=this;
+      let r=0;
+      for(let i=1;i<m;i++) if(D[i][n+1]<D[r][n+1]) r=i;
+      if(D[r][n+1]<-EPS) {
+        this.pivot(r,n);
+        if(!this.phase(1) || D[m+1][n+1]<-1e-6) throw new Error('Geen toelaatbare oplossing.');
+        for(let i=0;i<m;i++) if(B[i]===-1) {
+          let s=0;
+          for(let j=1;j<=n;j++) if(D[i][j]<D[i][s]-EPS ||
+            (Math.abs(D[i][j]-D[i][s])<=EPS && N[j]<N[s])) s=j;
+          this.pivot(i,s);
+        }
+      }
+      if(!this.phase(2)) throw new Error('Optimalisatie is onbegrensd.');
+      const x=Array(n).fill(0);
+      for(let i=0;i<m;i++) if(B[i]>=0 && B[i]<n) x[B[i]]=D[i][n+1];
+      return {x,value:D[m][n+1]};
+    }
+  }
+
+  function optimize(input){
+    const p={}; for(const k of ['batch',...METRICS])p[k]=Number(input[k]);
+    if(Object.values(p).some(v=>!Number.isFinite(v)))throw new Error('Vul alle doelwaarden in met geldige getallen.');
+    if(p.batch<100||p.batch>20000)throw new Error('De batch moet tussen 100 en 20.000 g liggen.');
+    for(const k of ['sugar','fat','msnf','other'])if(p[k]<0||p[k]>100)throw new Error('Percentages moeten tussen 0 en 100 liggen.');
+    if(p.sugar+p.fat+p.msnf+p.other>100+1e-8)throw new Error('Som van de droge stoffen mag niet boven 100% liggen.');
+    if(p.pod<0||p.pod>1000||p.pac<0||p.pac>1000)throw new Error('PAC en POD moeten tussen 0 en 1.000 g/kg liggen.');
+    const allowed=Array.isArray(input.allowed)?new Set(input.allowed):new Set(selectedForPreset(input.preset||'melkijs'));
+    if(allowed.size===0)throw new Error('Selecteer ten minste één ingrediënt.');
+    const n=INGREDIENTS.length, varCount=n+2*METRICS.length,A=[],b=[];
+    const add=(row,rhs)=>{A.push(row);b.push(rhs)};
+    function pair(row,target){add(row,target);add(row.map(x=>-x),-target)}
+    const mass=Array(varCount).fill(0);for(let i=0;i<n;i++)mass[i]=1;pair(mass,p.batch);
+    for(let k=0;k<METRICS.length;k++){
+      const key=METRICS[k],row=Array(varCount).fill(0);
+      for(let i=0;i<n;i++)row[i]=coefficient(INGREDIENTS[i],key);
+      row[n+2*k]=1;row[n+2*k+1]=-1;pair(row,metricTarget(p,key));
+    }
+    // De benaming sorbet is alleen logisch wanneer er werkelijk fruit in het recept zit.
+    // Dit is een transparante didactische minimumregel (niet afkomstig uit de lestabel).
+    if(input.preset==='sorbet'){
+      const fruits=INGREDIENTS.filter(i=>i.group==='fruit'&&allowed.has(i.id));
+      if(!fruits.length)throw new Error('Selecteer minimaal één fruitsoort voor een sorbet.');
+      const fruitRow=Array(varCount).fill(0);
+      for(let i=0;i<n;i++)if(INGREDIENTS[i].group==='fruit')fruitRow[i]=-1;
+      add(fruitRow,-.20*p.batch);
+    }
+    for(let i=0;i<n;i++){
+      const row=Array(varCount).fill(0);row[i]=1;
+      const maxKg=input.maxById&&Object.prototype.hasOwnProperty.call(input.maxById,INGREDIENTS[i].id)?Number(input.maxById[INGREDIENTS[i].id]):INGREDIENTS[i].max;
+      if(!Number.isFinite(maxKg)||maxKg<0||maxKg>1000)throw new Error('Ongeldige maximumwaarde voor '+INGREDIENTS[i].name+'.');
+      add(row,(allowed.has(INGREDIENTS[i].id)?maxKg:0)*p.batch/BASE);
+    }
+    // afwijkingen uitgedrukt in gram van de gekozen batch; klein tie-break getal geeft
+    // voorrang aan conventionele grondstoffen maar is geen echte kostprijs.
+    const c=Array(varCount).fill(0);
+    for(let i=0;i<n;i++)c[i]=INGREDIENTS[i].name==='Volle melk (3,5%)'?0.0005:-0.00001*(1+i/INGREDIENTS.length);
+    for(let j=n;j<varCount;j++)c[j]=-100;
+    const lp=new Simplex(A,b,c).solve();
+    const quantities=lp.x.slice(0,n).map(x=>Math.max(0,x));
+    const actual=metricsFor(quantities,p.batch),deviations={};
+    const tol={sugar:.025,fat:.025,msnf:.025,other:.025,pod:.4,pac:.4};
+    for(const k of METRICS)deviations[k]=actual[k]-p[k];
+    const exact=METRICS.every(k=>Math.abs(deviations[k])<=tol[k]);
+    return {quantities,actual,deviations,exact,batch:p.batch,ingredients:INGREDIENTS.map((i,j)=>({...i,grams:quantities[j]})),selected:Array.from(allowed),interpretation:'zuivel /100; andere ruwe factor letterlijk'};
+  }
+  return {INGREDIENTS,PRESETS,DEFAULTS,METRICS,coefficient,selectedForPreset,metricTarget,metricsFor,optimize,Simplex};
+});
+
+</script>
+<script>
+'use strict';
+(()=>{
+const m=window.IceModel,{INGREDIENTS,DEFAULTS,METRICS,optimize,selectedForPreset}=m;
+const byId=id=>document.getElementById(id),form=byId('recipe-form');
+const fmt=(x,n=2)=>new Intl.NumberFormat('nl-BE',{minimumFractionDigits:n,maximumFractionDigits:n}).format(x);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let last=null,selected=new Set(selectedForPreset('melkijs'));
+const labels={sugar:'Suiker',fat:'Vet',msnf:'VVMB',other:'Overige droge stof',pac:'PAC',pod:'POD'};
+function selectPreset(name){selected=new Set(selectedForPreset(name));paintPicker();}
+function paintPicker(){
+ const el=byId('ingredient-options');el.innerHTML='';
+ const groups=[['basis','Basis'],['zuivel','Melkproducten'],['zoetstof','Suikers'],['structuur','Structuur'],['overig','Overige'],['fruit','Fruit']];
+ for(const [id,heading] of groups){
+  const group=INGREDIENTS.filter(i=>i.group===id);if(!group.length)continue;
+  const section=document.createElement('div');section.className='option-group';
+  section.innerHTML=`<h4>${heading}</h4>`;
+  for(const i of group){const label=document.createElement('label');label.className='ingredient-option';
+   const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=selected.has(i.id);checkbox.dataset.id=i.id;
+   checkbox.addEventListener('change',()=>{checkbox.checked?selected.add(i.id):selected.delete(i.id);updateCount();});
+   const span=document.createElement('span');span.textContent=i.name;
+   const small=document.createElement('small');small.textContent=`max. ${i.max} g/kg`;
+   label.append(checkbox,span,small);section.append(label);
+  }
+  el.append(section);
+ }
+ updateCount();
+}
+function updateCount(){byId('count-active').textContent=`${selected.size} geselecteerd`;}
+function getInputs(){const v={allowed:[...selected],preset:form.elements.preset.value};for(const k of ['batch',...METRICS]){
+ const raw=form.elements[k].value;if(raw.trim()==='')throw new Error('Vul alle velden in.');v[k]=Number(raw);}
+ return v;
+}
+function render(p,o){
+ last={input:p,out:o};const state=byId('status');state.textContent=o.exact?'Doelen gehaald':'Afwijkende doelen';state.className='status '+(o.exact?'good':'warn');
+ byId('sum-mass').textContent=fmt(o.quantities.reduce((a,b)=>a+b,0),1)+' g';
+ byId('sum-solids').textContent=fmt(o.actual.totalSolids)+' %';byId('sum-water').textContent=fmt(o.actual.water)+' %';
+ const rows=o.ingredients.filter(x=>x.grams>.005).sort((a,b)=>b.grams-a.grams);
+ byId('ingredient-rows').innerHTML=rows.map(i=>`<tr><td>${esc(i.name)}</td><td><strong>${fmt(i.grams,2)} g</strong></td><td>${fmt(i.grams/p.batch*100)} %</td></tr>`).join('')||'<tr><td colspan="3">Geen ingrediënten gevonden.</td></tr>';
+ byId('metric-rows').innerHTML=METRICS.map(k=>{
+  const unit=['pac','pod'].includes(k)?' g/kg':' %',eps=['pac','pod'].includes(k)?.4:.025,d=o.deviations[k],good=Math.abs(d)<=eps;
+  return `<tr><td>${labels[k]}</td><td>${fmt(p[k])}${unit}</td><td>${fmt(o.actual[k])}${unit}</td><td class="${good?'difference-good':'difference-warn'}">${d>=0?'+':''}${fmt(d)}</td></tr>`;
+ }).join('');
+ byId('result-notice').textContent=o.exact?'Alle zes doelen zijn binnen de weergavetoleranties gehaald.':'Niet alle zes doelen zijn gelijktijdig haalbaar met deze ingrediënten en limieten. Bekijk de afwijkingen; pas doelen of selectie aan.';
+ byId('csv').disabled=false;
+}
+function calculate(evt){evt?.preventDefault();byId('error').hidden=true;try{const p=getInputs();render(p,optimize(p));}catch(e){byId('error').textContent=e.message;byId('error').hidden=false;byId('status').textContent='Controleer invoer';byId('status').className='status warn';}}
+form.addEventListener('submit',calculate);
+byId('preset').addEventListener('change',e=>selectPreset(e.target.value));
+byId('reset').addEventListener('click',()=>{for(const [k,v] of Object.entries(DEFAULTS)){if(form.elements[k])form.elements[k].value=v;}selectPreset('melkijs');calculate();});
+byId('csv').addEventListener('click',()=>{
+ if(!last)return;const {input,out}=last;
+ const csv=[['BOLLE LAB — recept uit lestabel'],['Ingrediënt','Gram','Percentage van de mix'],...out.ingredients.filter(i=>i.grams>.005).map(i=>[i.name,i.grams.toFixed(4),(i.grams/input.batch*100).toFixed(4)]),[],['Kenmerk','Doel','Berekend','Afwijking'],...METRICS.map(k=>[labels[k],input[k],out.actual[k].toFixed(5),out.deviations[k].toFixed(5)]),[],['Let op','PAC/POD bij zuivel gedeeld door 100; interpretatie controleren met leerkracht']].map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(';')).join('\r\n');
+ const url=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='BOLLE_recept_lesgegevens.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+byId('print').addEventListener('click',()=>window.print());
+byId('source-rows').innerHTML=INGREDIENTS.map(i=>`<tr><td>${i.row}</td><td>${esc(i.name)}</td>${[i.sugar,i.fat,i.msnf,i.other,i.solids,i.water,i.pacRaw,i.podRaw,i.scale].map(v=>`<td>${fmt(v,v%1?4:0)}</td>`).join('')}</tr>`).join('');
+selectPreset('melkijs');calculate();
+})();
+
+</script>
+</body></html>
